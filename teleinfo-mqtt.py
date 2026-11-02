@@ -191,12 +191,17 @@ def boucle_standard(ser, client):
 
 
 def main():
-    utilisateur, motdepasse = lire_conf()
-
-    # Le tampon AVANT le réseau : une passerelle qui démarre sans WiFi doit
-    # quand même mesurer et enregistrer. Sinon une coupure réseau creuse un
-    # trou définitif dans les données.
+    # Le tampon AVANT tout le reste : ni le réseau ni la configuration ne
+    # doivent pouvoir empêcher la mesure et l'enregistrement. Une passerelle
+    # qui démarre sans WiFi, ou avec un fichier de conf cassé, doit continuer
+    # à tamponner — seule la publication MQTT est perdue.
     init_tampon()
+
+    try:
+        utilisateur, motdepasse = lire_conf()
+    except Exception as erreur:
+        print(f"configuration MQTT illisible : {erreur} — tampon actif, publication désactivée", flush=True)
+        utilisateur, motdepasse = None, None
 
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="pitinfo")
     client.username_pw_set(utilisateur, motdepasse)

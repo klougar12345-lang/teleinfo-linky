@@ -6,10 +6,10 @@
 # lecture réelle. Seul un topic de DONNÉES (teleinfo/BASE) fait foi.
 #
 # Règle de conception : ne JAMAIS redémarrer quand le problème n'est pas la
-# lecture. Si le broker est injoignable, redémarrer teleinfo-mqtt est
-# contre-productif : ce programme se connecte AVANT d'initialiser son tampon,
-# donc chaque redémarrage le fait planter sans rien tamponner — on casserait
-# le tampon local au moment précis où il est utile.
+# lecture. Depuis le correctif « tampon avant réseau », teleinfo-mqtt tamponne
+# même sans broker ; redémarrer quand le broker est absent est donc inutile, et
+# l'était déjà quand ce n'était pas le cas — cela cassait le tampon au moment
+# précis où il servait.
 #
 # Codes retour de mosquitto_sub, mesurés sur ce Pi :
 #   0   une trame est arrivée
