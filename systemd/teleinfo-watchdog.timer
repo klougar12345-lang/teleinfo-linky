@@ -1,0 +1,10 @@
+[Unit]
+Description=Vérifie toutes les 5 minutes qu une trame téléinfo arrive
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

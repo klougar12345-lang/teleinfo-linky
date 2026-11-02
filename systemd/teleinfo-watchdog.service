@@ -1,0 +1,7 @@
+[Unit]
+Description=Chien de garde de la lecture TIC (redémarre teleinfo-mqtt si aucune trame)
+
+[Service]
+TimeoutStartSec=3min
+Type=oneshot
+ExecStart=/usr/local/bin/teleinfo-watchdog.sh
