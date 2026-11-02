@@ -1,0 +1,9 @@
+[Unit]
+Description=Rejeu du tampon teleinfo vers Home Assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /usr/local/bin/rejeu_pi.py
+TimeoutStartSec=300

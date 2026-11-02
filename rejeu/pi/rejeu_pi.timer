@@ -1,0 +1,11 @@
+[Unit]
+Description=Rejeu du tampon teleinfo, toutes les heures
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=1h
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -88,11 +88,16 @@ Pas d'horloge matérielle sur un Pi : au démarrage, l'horodatage des premières
 mesures peut être faux de quelques secondes. Sans conséquence sur des mesures
 espacées de cinq minutes, à garder en tête pour des analyses fines.
 
+## Rejeu du tampon
+
+Le tampon n'a de valeur que s'il est relu. Le dossier [`rejeu/`](rejeu/) contient
+les deux moitiés de la chaîne : `rejeu_pi.py` publie les heures manquantes depuis
+le Pi, `rejeu-ha.py` les importe dans une statistique externe de Home Assistant
+avec acquittement. Voir [`rejeu/README.md`](rejeu/README.md) — notamment pourquoi
+il ne faut **jamais** écrire dans une statistique gérée par le recorder.
+
 ## Ce qui reste à faire
 
-- **Rejeu du tampon automatique.** Le tampon n'a de valeur que s'il est relu.
-  Ici, un service séparé sur une autre machine importe les heures manquantes
-  dans les statistiques Home Assistant — il n'est pas inclus dans ce dépôt.
 - **Un compte MQTT par client.** Aujourd'hui le même identifiant sert à la
   passerelle, au chien de garde et à plusieurs scripts : une fuite oblige à
   tout révoquer.

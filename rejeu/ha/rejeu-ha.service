@@ -1,0 +1,15 @@
+[Unit]
+Description=Rejeu teleinfo vers les statistiques Home Assistant
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/home/corneille/venv-mqtt/bin/python /home/corneille/scripts/rejeu-ha.py
+Restart=always
+RestartSec=30
+StandardOutput=append:/home/corneille/logs/rejeu-ha.log
+StandardError=append:/home/corneille/logs/rejeu-ha.log
+
+[Install]
+WantedBy=default.target
